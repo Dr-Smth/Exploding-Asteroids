@@ -12,7 +12,7 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 clock = pygame.time.Clock()
 
 def main():
-    print("Starting asteroids!")
+    print("Starting 'Sploding Asteroids!")
     print(f"Screen width: {SCREEN_WIDTH}")
     print(f"Screen height: {SCREEN_HEIGHT}")
     
@@ -81,7 +81,7 @@ def main():
             screen.fill((0, 0, 0))
 
             # Render the game title, instructions, and high score
-            title_text = font.render("Asteroids !!!", True, (255, 255, 255))
+            title_text = font.render("'Sploding Asteroids !!!", True, (255, 255, 255))
             instruction_text = font.render("Press ENTER to Start", True, (255, 255, 255))
             high_score_text = font.render(f"High Score: {high_score}", True, (255, 255, 255))
 

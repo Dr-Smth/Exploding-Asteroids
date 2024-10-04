@@ -9,23 +9,35 @@ class Player(CircleShape):
         super().__init__(x, y, PLAYER_RADIUS)
         self.rotation = 0
         self.cooldown = 0
-    
-    # creates the player ship shape
-    def triangle(self):
-        forward = pygame.Vector2(0, 1).rotate(self.rotation)
-        right = pygame.Vector2(0, 1).rotate(self.rotation + 90) * self.radius / 1.5
-        a = self.position + forward * self.radius
-        b = self.position - forward * self.radius - right
-        c = self.position - forward * self.radius + right
-        return [a, b, c]
 
-    # enables the player ship shape to be drawn to the screen
+        # Load the player ship image
+        self.original_image = pygame.image.load("Assets/Ships/Ahmed's SpaceShip.png").convert_alpha()
+
+        # Scale the image to match the desired size (optional)
+        self.original_image = pygame.transform.scale(
+            self.original_image,
+            (int(self.radius * 2), int(self.radius * 2))
+        )
+
+        # Create a rect for positioning
+        self.rect = self.original_image.get_rect(center=(self.position.x, self.position.y))
+
+    # enables the player ship to be drawn to the screen
     def draw(self, screen):
-        pygame.draw.polygon(screen, (255, 255, 255), self.triangle(), 2)
+        # Rotate the image
+        rotated_image = pygame.transform.rotate(self.original_image, -self.rotation)
+
+        # Get the rect of the rotated image and set its center
+        rotated_rect = rotated_image.get_rect(center=(self.position.x, self.position.y))
+
+        # Blit the rotated image onto the screen
+        screen.blit(rotated_image, rotated_rect)
 
     # enables the player ship shape to rotate
     def rotate(self, dt):
         self.rotation += PLAYER_TURN_SPEED * dt
+        # Keep rotation within 0-360 degrees
+        self.rotation %= 360
 
     # enables the player ship to be updated
     def update(self, dt):
@@ -64,7 +76,7 @@ class Player(CircleShape):
     
     # enables the player ship to move
     def move(self, dt):
-        forward = pygame.Vector2(0, 1).rotate(self.rotation)
+        forward = pygame.Vector2(0, -1).rotate(self.rotation)
         self.position += forward * PLAYER_SPEED * dt
 
     # creates a new shot when called
@@ -72,4 +84,4 @@ class Player(CircleShape):
         # Create a new shot at the player's position
         new_shot = Shot(self.position.x, self.position.y, SHOT_RADIUS)
         # sets, rotates, and scales up the shot velocity vector
-        new_shot.velocity = pygame.Vector2(0, 1).rotate(self.rotation) * PLAYER_SHOOT_SPEED
+        new_shot.velocity = pygame.Vector2(0, -1).rotate(self.rotation) * PLAYER_SHOOT_SPEED
