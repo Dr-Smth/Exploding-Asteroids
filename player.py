@@ -5,19 +5,13 @@ from shot import *
 
 # --- Player class logic ---
 class Player(CircleShape):
-    def __init__(self, x, y):
+    def __init__(self, x, y, image):
         super().__init__(x, y, PLAYER_RADIUS)
         self.rotation = 0
         self.cooldown = 0
 
         # Load the player ship image
-        self.original_image = pygame.image.load("Assets/Ships/Ahmed's SpaceShip.png").convert_alpha()
-
-        # Scale the image to match the desired size (optional)
-        self.original_image = pygame.transform.scale(
-            self.original_image,
-            (int(self.radius * 2), int(self.radius * 2))
-        )
+        self.original_image = image
 
         # Create a rect for positioning
         self.rect = self.original_image.get_rect(center=(self.position.x, self.position.y))
