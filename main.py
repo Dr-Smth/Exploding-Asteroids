@@ -34,8 +34,12 @@ def main():
         pygame.image.load("Assets/Ships/orange_02.png").convert_alpha()
     ]
 
-    # Scale player images
+    # Load shot image asset
+    shot_image = shot_image = pygame.image.load(SHOT_IMAGE).convert_alpha()
+    
+    # Scale images
     player_assets = [pygame.transform.scale(img, (64, 64)) for img in player_assets]
+    shot_image = pygame.transform.scale(shot_image, (32, 32))
 
     selected_ship_index = 0  # Default selected ship
     selected_ship_image = player_assets[selected_ship_index]
@@ -53,7 +57,7 @@ def main():
     Shot.containers = (shots, updatable, drawable)
 
     # Initiates player and astroid field
-    player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, selected_ship_image)
+    player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, selected_ship_image, shot_image)
     asteroid_field = AsteroidField()
 
     # Initiates game font for on screen text
@@ -82,7 +86,7 @@ def main():
         Shot.containers = (shots, updatable, drawable)
 
         # Recreate player and asteroid field
-        player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, selected_ship_image)
+        player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, selected_ship_image, shot_image)
         asteroid_field = AsteroidField()
 
     while True:

@@ -5,10 +5,11 @@ from shot import *
 
 # --- Player class logic ---
 class Player(CircleShape):
-    def __init__(self, x, y, image):
+    def __init__(self, x, y, image, shot_image):
         super().__init__(x, y, PLAYER_RADIUS)
         self.rotation = 0
         self.cooldown = 0
+        self.shot_image = shot_image
 
         # Load the player ship image
         self.original_image = image
@@ -76,6 +77,6 @@ class Player(CircleShape):
     # creates a new shot when called
     def shoot(self):
         # Create a new shot at the player's position
-        new_shot = Shot(self.position.x, self.position.y, SHOT_RADIUS)
+        new_shot = Shot(self.position.x, self.position.y, SHOT_RADIUS, self.shot_image, self.rotation)
         # sets, rotates, and scales up the shot velocity vector
         new_shot.velocity = pygame.Vector2(0, -1).rotate(self.rotation) * PLAYER_SHOOT_SPEED
