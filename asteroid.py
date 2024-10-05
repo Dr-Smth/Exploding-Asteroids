@@ -5,12 +5,26 @@ from constants import *
 
 # --- Asteroid Class logic ---
 class Asteroid(CircleShape):
-    def __init__(self, x, y, radius):
+    def __init__(self, x, y, radius, asteroid_assets):
         super().__init__(x, y, radius)
+        self.asteroid_assets = asteroid_assets
+        self.image = random.choice(asteroid_assets)
+        if radius <= 20:
+            self.image = pygame.transform.scale(self.image, (32, 32))
+        elif radius <= 40:
+            self.image = pygame.transform.scale(self.image, (64, 64))
+        else:
+            self.image = pygame.transform.scale(self.image, (128, 128))
+
+        # Create a rect for positioning
+        self.rect = self.image.get_rect(center=(self.position.x, self.position.y))
     
     # enables an asteroid to be drawn to the screen
     def draw(self, screen):
-        pygame.draw.circle(screen, (255,255,255), self.position, self.radius, 2)
+        # Update image position
+        self.rect = self.image.get_rect(center=(int(self.position.x), int(self.position.y)))
+        # Blit the asteroid image onto the screen
+        screen.blit(self.image, self.rect)
     
     # enables asteroids to be updated
     def update(self, dt):
@@ -29,11 +43,10 @@ class Asteroid(CircleShape):
 
             new_radius = self.radius - ASTEROID_MIN_RADIUS
 
-            asteroid = Asteroid(self.position.x, self.position.y, new_radius)
+            asteroid = Asteroid(self.position.x, self.position.y, new_radius, self.asteroid_assets)
             asteroid.velocity = first_angle * 1.2
 
-            asteroid = Asteroid(self.position.x, self.position.y, new_radius)
+            asteroid = Asteroid(self.position.x, self.position.y, new_radius, self.asteroid_assets)
             asteroid.velocity = second_angle * 1.2
 
             return 100
-

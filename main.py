@@ -1,4 +1,5 @@
 import pygame
+import os
 import sys
 from constants import *
 from player import *
@@ -36,6 +37,18 @@ def main():
 
     # Load shot image asset
     shot_image = shot_image = pygame.image.load(SHOT_IMAGE).convert_alpha()
+
+    # Load asteroid image assets
+    asteroid_assets = []
+
+    for filename in os.listdir(ASTERPOD_ASSETS):
+        # Constructs full path to asset
+        image_path = os.path.join(ASTERPOD_ASSETS, filename)
+
+        image = pygame.image.load(image_path).convert_alpha()
+
+        asteroid_assets.append(image)
+
     
     # Scale images
     player_assets = [pygame.transform.scale(img, (64, 64)) for img in player_assets]
@@ -58,7 +71,7 @@ def main():
 
     # Initiates player and astroid field
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, selected_ship_image, shot_image)
-    asteroid_field = AsteroidField()
+    asteroid_field = AsteroidField(asteroid_assets)
 
     # Initiates game font for on screen text
     pygame.font.init()
@@ -87,7 +100,7 @@ def main():
 
         # Recreate player and asteroid field
         player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, selected_ship_image, shot_image)
-        asteroid_field = AsteroidField()
+        asteroid_field = AsteroidField(asteroid_assets)
 
     while True:
         events = pygame.event.get()  # Collects all events once per frame
