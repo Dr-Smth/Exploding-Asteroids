@@ -6,17 +6,22 @@ def handle_start_state(screen, font, events, high_score):
     # Fill the screen with a background color
     screen.fill((0, 0, 0))
 
+    # Larger fonts size for start text
+    v_large_font = pygame.font.SysFont("Arial", 108)
+    large_font = pygame.font.SysFont("Arial", 54)
+    medium_font = pygame.font.SysFont("Arial", 36)
+
     # Render the game title, instructions, and high score
-    title_text = font.render("'Sploding Asteroids !!!", True, (255, 255, 255))
-    instruction_text = font.render("Press ENTER to Start", True, (255, 255, 255))
-    select_ship_text = font.render("Press S to Select Your Ship", True, (255, 255, 255))
-    high_score_text = font.render(f"High Score: {high_score}", True, (255, 255, 255))
+    title_text = v_large_font.render("'Sploding Asteroids !!!", True, (255, 140, 0))
+    instruction_text = large_font.render("Press ENTER to Start", True, (192, 192, 192))
+    select_ship_text = font.render("Press S to Select Your Ship", True, (192, 192, 192))
+    high_score_text = medium_font.render(f"High Score: {high_score}", True, (255, 140, 0))
 
     # Get rectangles for positioning
-    title_rect = title_text.get_rect(center=(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 50))
+    title_rect = title_text.get_rect(center=(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 200))
     instruction_rect = instruction_text.get_rect(center=(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2))
-    select_ship_rect = select_ship_text.get_rect(center=(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 50))
-    high_score_rect = high_score_text.get_rect(center=(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 150))
+    select_ship_rect = select_ship_text.get_rect(center=(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 100))
+    high_score_rect = high_score_text.get_rect(center=(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 250))
 
     # Blit the text onto the screen
     screen.blit(title_text, title_rect)

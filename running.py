@@ -38,7 +38,7 @@ def handle_running_state(screen, updatable, drawable, asteroids, shots, player, 
         object.draw(screen)
 
     # Render the score text
-    score_text = font.render(f"Score: {player_score}", True, (255, 255, 255))
+    score_text = font.render(f"Score: {player_score}", True, (255, 140, 0))
     # Blit the score text onto the screen at the desired position
     screen.blit(score_text, (10, 10))
 

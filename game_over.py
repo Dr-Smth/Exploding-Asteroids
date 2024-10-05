@@ -16,24 +16,24 @@ def handle_game_over_state(screen, font, events, player_score, asteroid_kill_sco
     # Render the game over text
     game_over_text = v_large_font.render("Game Over !!!", True, (255, 0, 0))
 
-    well_done_text = large_font.render("New High Score !!!", True, (255, 255, 255))
-    
-    score_text = medium_font.render(f"Final Score: {player_score}", True, (255, 255, 255))
-    asteroid_kills_text = medium_font.render(f"No. Asteroids 'Sploded: {asteroid_kills}", True, (255, 255, 255))
-    asteroid_kill_score_text = medium_font.render(f"Asteroid 'Splosion Score: {asteroid_kill_score}", True, (255, 255, 255))
-    survival_time_score_text = medium_font.render(f"Survival Time Score: {survival_time_score}", True, (255, 255, 255))
-    
-    restart_text = font.render("Press R to Restart, M for Menu, or Q to Quit", True, (255, 255, 255))
+    well_done_text = large_font.render("New High Score !!!", True, (255, 140, 0))
+
+    score_text = medium_font.render(f"Final Score:                     {player_score}", True, (192, 192, 192))
+    asteroid_kills_text = medium_font.render(f"Asteroids 'Sploded:     {asteroid_kills}", True, (192, 192, 192))
+    asteroid_kill_score_text = medium_font.render(f"'Splosion Score:             {asteroid_kill_score}", True, (192, 192, 192))
+    survival_time_score_text = medium_font.render(f"Survival Time Score:    {survival_time_score}", True, (192, 192, 192))
+
+    restart_text = font.render("Press R to Restart, M for Menu, or Q to Quit", True, (192, 192, 192))
 
     # Get rectangles for positioning
     game_over_rect = game_over_text.get_rect(center=(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 200))
 
     well_done_rect = well_done_text.get_rect(center=(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 50))
 
-    score_rect = score_text.get_rect(center=(SCREEN_WIDTH / 2 - 95, SCREEN_HEIGHT / 2 + 50))
-    asteroid_kills_rect = score_text.get_rect(center=(SCREEN_WIDTH / 2 - 95, SCREEN_HEIGHT / 2 + 100))
-    asteroid_kills_score_rect = score_text.get_rect(center=(SCREEN_WIDTH / 2 - 95, SCREEN_HEIGHT / 2 + 150))
-    survival_time_score_rect = score_text.get_rect(center=(SCREEN_WIDTH / 2 - 95, SCREEN_HEIGHT / 2 + 200))
+    score_rect = score_text.get_rect(topleft=(SCREEN_WIDTH / 2 - 210, SCREEN_HEIGHT / 2 + 50))
+    asteroid_kills_rect = score_text.get_rect(topleft=(SCREEN_WIDTH / 2 - 210, SCREEN_HEIGHT / 2 + 100))
+    asteroid_kills_score_rect = score_text.get_rect(topleft=(SCREEN_WIDTH / 2 - 210, SCREEN_HEIGHT / 2 + 150))
+    survival_time_score_rect = score_text.get_rect(topleft=(SCREEN_WIDTH / 2 - 210, SCREEN_HEIGHT / 2 + 200))
 
     restart_rect = restart_text.get_rect(center=(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 300))
 

@@ -21,15 +21,30 @@ def handle_ship_select_state(screen, font, events, player_assets, selected_ship_
     screen.blit(instruction_text, instruction_rect)
     screen.blit(back_text, back_rect)
 
-    # Display the ship options
+    # Display the ship options in a grid layout
     ship_rects = []
+
+    # Grid settings
+    num_columns = 12  # Adjust this value as needed
+    spacing_x = 100  # Horizontal spacing between ships
+    spacing_y = 90  # Vertical spacing between ships
+
+    # Calculate starting positions
+    total_columns = min(num_columns, len(player_assets))
+    total_rows = (len(player_assets) + num_columns - 1) // num_columns
+
+    grid_width = (total_columns - 1) * spacing_x
+    grid_height = (total_rows - 1) * spacing_y
+
+    start_x = (SCREEN_WIDTH - grid_width) / 2
+    start_y = (SCREEN_HEIGHT - grid_height) / 2 + 25  # Adjust start_y to account for header text
+
     for index, ship_image in enumerate(player_assets):
-        # Calculate position for each ship
-        ships_total = len(player_assets)
-        spacing = 150
-        total_width = (ships_total - 1) * spacing
-        x_position = (SCREEN_WIDTH / 2 - total_width / 2) + index * spacing
-        y_position = SCREEN_HEIGHT / 2
+        row = index // num_columns
+        col = index % num_columns
+
+        x_position = start_x + col * spacing_x
+        y_position = start_y + row * spacing_y
 
         # Get the rect for mouse collision detection
         ship_rect = ship_image.get_rect(center=(x_position, y_position))

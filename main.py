@@ -31,17 +31,22 @@ def main():
     time_score = 0
     high_score = 0
 
-    # Load player assets
-    player_assets = [
-        pygame.image.load("Assets/Ships/Ahmed's SpaceShip.png").convert_alpha(),
-        pygame.image.load("Assets/Ships/orange_01.png").convert_alpha(),
-        pygame.image.load("Assets/Ships/orange_02.png").convert_alpha()
-    ]
+    # Load player assetss
 
-    # Load shot image asset
+    player_assets = []
+
+    for filename in os.listdir(PLAYER_SHIP_ASSETS):
+        # Constructs full path to asset
+        image_path = os.path.join(PLAYER_SHIP_ASSETS, filename)
+
+        image = pygame.image.load(image_path).convert_alpha()
+
+        player_assets.append(image)
+
+    # Load shot asset
     shot_image = shot_image = pygame.image.load(SHOT_IMAGE).convert_alpha()
 
-    # Load asteroid image assets
+    # Load asteroid assets
     asteroid_assets = []
 
     for filename in os.listdir(ASTERPOD_ASSETS):
