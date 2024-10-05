@@ -97,7 +97,7 @@ def main():
         elif game_state == "ship_select":
             game_state, selected_ship_index, selected_ship_image = handle_ship_select_state(screen, font, events, player_assets, selected_ship_index)
         elif game_state == "running":
-            game_state, player_score = handle_running_state(screen, updatable, drawable, asteroids, shots, player, dt, player_score, font)
+            game_state, player_score = handle_running_state(screen, updatable, drawable, asteroids, shots, player, dt, player_score, font, events)
         elif game_state == "game_over":
             game_state, high_score = handle_game_over_state(screen, font, events, player_score, high_score)
 

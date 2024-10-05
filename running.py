@@ -1,10 +1,12 @@
+import pygame
+import sys
 from constants import *
 from player import *
 from asteroid import *
 from asteroidfield import *
 from shot import *
 
-def handle_running_state(screen, updatable, drawable, asteroids, shots, player, dt, player_score, font):
+def handle_running_state(screen, updatable, drawable, asteroids, shots, player, dt, player_score, font, events):
     # Fill the screen with a background color
     screen.fill((0,0,0))
 
@@ -31,5 +33,10 @@ def handle_running_state(screen, updatable, drawable, asteroids, shots, player, 
     score_text = font.render(f"Score: {player_score}", True, (255, 255, 255))
     # Blit the score text onto the screen at the desired position
     screen.blit(score_text, (10, 10))
+
+    for event in events:
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
 
     return "running", player_score
