@@ -31,8 +31,7 @@ def main():
     time_score = 0
     high_score = 0
 
-    # Load player assetss
-
+    # Load player assets
     player_assets = []
 
     for filename in os.listdir(PLAYER_SHIP_ASSETS):

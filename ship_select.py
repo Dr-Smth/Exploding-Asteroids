@@ -8,8 +8,8 @@ def handle_ship_select_state(screen, font, events, player_assets, selected_ship_
 
     # Render the selection instructions
     select_text = font.render("Select Your Ship", True, (255, 255, 255))
-    instruction_text = font.render("Click on a ship to select it", True, (255, 255, 255))
-    back_text = font.render("Press B to go Back", True, (255, 255, 255))
+    instruction_text = font.render("Click on a ship, or use the arrow keys, to select it", True, (255, 255, 255))
+    back_text = font.render("Press ENTER to select ship and go to the main menu", True, (255, 255, 255))
 
     # Get rectangles for positioning
     select_rect = select_text.get_rect(center=(SCREEN_WIDTH / 2, 50))
@@ -25,7 +25,7 @@ def handle_ship_select_state(screen, font, events, player_assets, selected_ship_
     ship_rects = []
 
     # Grid settings
-    num_columns = 12  # Adjust this value as needed
+    num_columns = 12
     spacing_x = 100  # Horizontal spacing between ships
     spacing_y = 90  # Vertical spacing between ships
 
@@ -37,7 +37,7 @@ def handle_ship_select_state(screen, font, events, player_assets, selected_ship_
     grid_height = (total_rows - 1) * spacing_y
 
     start_x = (SCREEN_WIDTH - grid_width) / 2
-    start_y = (SCREEN_HEIGHT - grid_height) / 2 + 25  # Adjust start_y to account for header text
+    start_y = (SCREEN_HEIGHT - grid_height) / 2 + 25
 
     for index, ship_image in enumerate(player_assets):
         row = index // num_columns
@@ -75,8 +75,30 @@ def handle_ship_select_state(screen, font, events, player_assets, selected_ship_
                     selected_ship_index = index
                     break
         elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_b:
+            if event.key == pygame.K_RETURN:
                 # Go back to the start screen
                 return "start", selected_ship_index, player_assets[selected_ship_index]
+            elif event.key == pygame.K_RIGHT:
+                # Move selection right
+                if (selected_ship_index % num_columns) < (num_columns - 1):
+                    if selected_ship_index + 1 < len(player_assets):
+                        selected_ship_index += 1
+                else:
+                    # Wrap to the start of the next row if applicable
+                    if selected_ship_index + 1 < len(player_assets):
+                        selected_ship_index += 1
+            elif event.key == pygame.K_LEFT:
+                # Move selection left
+                if (selected_ship_index % num_columns) > 0:
+                    selected_ship_index -= 1
+            elif event.key == pygame.K_DOWN:
+                # Move selection down
+                if selected_ship_index + num_columns < len(player_assets):
+                    selected_ship_index += num_columns
+            elif event.key == pygame.K_UP:
+                # Move selection up
+                if selected_ship_index - num_columns >= 0:
+                    selected_ship_index -= num_columns
+
 
     return "ship_select", selected_ship_index, player_assets[selected_ship_index]
