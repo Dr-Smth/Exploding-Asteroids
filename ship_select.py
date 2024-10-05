@@ -7,9 +7,9 @@ def handle_ship_select_state(screen, font, events, player_assets, selected_ship_
     screen.fill((0, 0, 0))
 
     # Render the selection instructions
-    select_text = font.render("Select Your Ship", True, (255, 255, 255))
-    instruction_text = font.render("Click on a ship, or use the arrow keys, to select it", True, (255, 255, 255))
-    back_text = font.render("Press ENTER to select ship and go to the main menu", True, (255, 255, 255))
+    select_text = font.render("Select Your Ship", True, (255, 140, 0))
+    instruction_text = font.render("Click on a ship, or use the arrow keys, to select it", True, (192, 192, 192))
+    back_text = font.render("Press ENTER to select ship and go to the main menu", True, (192, 192, 192))
 
     # Get rectangles for positioning
     select_rect = select_text.get_rect(center=(SCREEN_WIDTH / 2, 50))

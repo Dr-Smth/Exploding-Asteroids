@@ -43,7 +43,7 @@ def main():
         player_assets.append(image)
 
     # Load shot asset
-    shot_image = shot_image = pygame.image.load(SHOT_IMAGE).convert_alpha()
+    shot_image = pygame.image.load(SHOT_IMAGE).convert_alpha()
 
     # Load asteroid assets
     asteroid_assets = []
@@ -61,7 +61,7 @@ def main():
     player_assets = [pygame.transform.scale(img, (64, 64)) for img in player_assets]
     shot_image = pygame.transform.scale(shot_image, (32, 32))
 
-    selected_ship_index = 0  # Default selected ship
+    selected_ship_index = 30  # Default selected ship
     selected_ship_image = player_assets[selected_ship_index]
         
     # Initialize sprite groups
