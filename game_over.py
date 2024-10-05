@@ -13,6 +13,8 @@ def handle_game_over_state(screen, font, events, player_score, asteroid_kill_sco
     large_font = pygame.font.SysFont("Arial", 54)
     medium_font = pygame.font.SysFont("Arial", 36)
 
+    # Player Rank Logic
+    
     # Render the game over text
     game_over_text = v_large_font.render("Game Over !!!", True, (255, 0, 0))
 
