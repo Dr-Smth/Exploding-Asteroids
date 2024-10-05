@@ -6,27 +6,49 @@ def handle_game_over_state(screen, font, events, player_score, asteroid_kill_sco
     # Fill the screen with a background color
     screen.fill((0, 0, 0))
 
-    time_score = player_score - asteroid_kill_score
+    survival_time_score = player_score - asteroid_kill_score
+
+    # Larger fonts size for the game over text
+    v_large_font = pygame.font.SysFont("Arial", 144)
+    large_font = pygame.font.SysFont("Arial", 54)
+    medium_font = pygame.font.SysFont("Arial", 36)
 
     # Render the game over text
-    game_over_text = font.render("Game Over !!!", True, (255, 0, 0))
-    score_text = font.render(f"Final Score: {player_score}, Asteroids 'Sploded: {asteroid_kills}, Asteroid Score: {asteroid_kill_score}, Time Score: {time_score}", True, (255, 255, 255))
+    game_over_text = v_large_font.render("Game Over !!!", True, (255, 0, 0))
+
+    well_done_text = large_font.render("New High Score !!!", True, (255, 255, 255))
+    
+    score_text = medium_font.render(f"Final Score: {player_score}", True, (255, 255, 255))
+    asteroid_kills_text = medium_font.render(f"No. Asteroids 'Sploded: {asteroid_kills}", True, (255, 255, 255))
+    asteroid_kill_score_text = medium_font.render(f"Asteroid 'Splosion Score: {asteroid_kill_score}", True, (255, 255, 255))
+    survival_time_score_text = medium_font.render(f"Survival Time Score: {survival_time_score}", True, (255, 255, 255))
+    
     restart_text = font.render("Press R to Restart, M for Menu, or Q to Quit", True, (255, 255, 255))
-    well_done_text = font.render("Well Done, You've set a new High Score !!!", True, (255, 255, 255))
 
     # Get rectangles for positioning
-    game_over_rect = game_over_text.get_rect(center=(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 50))
-    score_rect = score_text.get_rect(center=(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2))
-    restart_rect = restart_text.get_rect(center=(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 50))
-    well_done_rect = well_done_text.get_rect(center=(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 100))
+    game_over_rect = game_over_text.get_rect(center=(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 200))
+
+    well_done_rect = well_done_text.get_rect(center=(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 50))
+
+    score_rect = score_text.get_rect(center=(SCREEN_WIDTH / 2 - 95, SCREEN_HEIGHT / 2 + 50))
+    asteroid_kills_rect = score_text.get_rect(center=(SCREEN_WIDTH / 2 - 95, SCREEN_HEIGHT / 2 + 100))
+    asteroid_kills_score_rect = score_text.get_rect(center=(SCREEN_WIDTH / 2 - 95, SCREEN_HEIGHT / 2 + 150))
+    survival_time_score_rect = score_text.get_rect(center=(SCREEN_WIDTH / 2 - 95, SCREEN_HEIGHT / 2 + 200))
+
+    restart_rect = restart_text.get_rect(center=(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 300))
 
     # Blit the text onto the screen
     screen.blit(game_over_text, game_over_rect)
-    screen.blit(score_text, score_rect)
-    screen.blit(restart_text, restart_rect)
+
     if player_score > high_score:
         screen.blit(well_done_text, well_done_rect)
 
+    screen.blit(score_text, score_rect)
+    screen.blit(asteroid_kills_text, asteroid_kills_rect)
+    screen.blit(asteroid_kill_score_text, asteroid_kills_score_rect)
+    screen.blit(survival_time_score_text, survival_time_score_rect)
+
+    screen.blit(restart_text, restart_rect)
 
     # Handle events on game over screen
     for event in events:
