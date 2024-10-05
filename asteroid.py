@@ -49,4 +49,7 @@ class Asteroid(CircleShape):
             asteroid = Asteroid(self.position.x, self.position.y, new_radius, self.asteroid_assets)
             asteroid.velocity = second_angle * 1.2
 
-            return 100
+            if self.radius <= 40:
+                return 150
+            else:
+                return 300

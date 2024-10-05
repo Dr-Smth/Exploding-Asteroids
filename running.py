@@ -6,23 +6,31 @@ from asteroid import *
 from asteroidfield import *
 from shot import *
 
-def handle_running_state(screen, updatable, drawable, asteroids, shots, player, dt, player_score, font, events):
+def handle_running_state(screen, updatable, drawable, asteroids, shots, player, dt, player_score, asteroid_kill_score, asteroid_kills, time_score, font, events):
     # Fill the screen with a background color
     screen.fill((0,0,0))
 
+    time_score += dt * 20
+    if time_score >= 1:
+        player_score += 1
+        time_score = 0
+    
     for object in updatable:
         object.update(dt)
     
     # Player - Asteroid collision detection and handeling
     for asteroid in asteroids:
         if asteroid.collision_check(player):
-            return "game_over", player_score
+            return "game_over", player_score, asteroid_kill_score, asteroid_kills, time_score
 
     # Shot - Asteroid collision detection and handeling
     for asteroid in asteroids:
         for shot in shots:
             if asteroid.collision_check(shot):
-                player_score += asteroid.split()
+                temp_asteroid_score = asteroid.split()
+                asteroid_kill_score += temp_asteroid_score
+                player_score += temp_asteroid_score
+                asteroid_kills += 1
                 shot.kill()
 
     # Draws all drawable objects to the screen
@@ -39,4 +47,4 @@ def handle_running_state(screen, updatable, drawable, asteroids, shots, player, 
             pygame.quit()
             sys.exit()
 
-    return "running", player_score
+    return "running", player_score, asteroid_kill_score, asteroid_kills, time_score

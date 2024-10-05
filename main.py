@@ -26,6 +26,9 @@ def main():
 
     # Initiates player score and high score variables
     player_score = 0
+    asteroid_kill_score = 0
+    asteroid_kills = 0
+    time_score = 0
     high_score = 0
 
     # Load player assets
@@ -81,10 +84,13 @@ def main():
     prev_game_state = None # Initilises prev game state
   
     def reset_game():
-        nonlocal player_score, updatable, drawable, asteroids, shots, player, asteroid_field, selected_ship_image
+        nonlocal player_score, updatable, drawable, asteroids, shots, player, asteroid_field, selected_ship_image, asteroid_kill_score, asteroid_kills, time_score
        
         # Reset the score
         player_score = 0
+        asteroid_kill_score = 0
+        asteroid_kills = 0
+        time_score = 0
 
         # Clear all sprite groups
         updatable.empty()
@@ -110,9 +116,9 @@ def main():
         elif game_state == "ship_select":
             game_state, selected_ship_index, selected_ship_image = handle_ship_select_state(screen, font, events, player_assets, selected_ship_index)
         elif game_state == "running":
-            game_state, player_score = handle_running_state(screen, updatable, drawable, asteroids, shots, player, dt, player_score, font, events)
+            game_state, player_score, asteroid_kill_score, asteroid_kills, time_score = handle_running_state(screen, updatable, drawable, asteroids, shots, player, dt, player_score, asteroid_kill_score, asteroid_kills, time_score, font, events)
         elif game_state == "game_over":
-            game_state, high_score = handle_game_over_state(screen, font, events, player_score, high_score)
+            game_state, high_score = handle_game_over_state(screen, font, events, player_score, asteroid_kill_score, asteroid_kills, high_score)
 
         # Check if we need to reset the game
         if game_state == "running" and prev_game_state in ["start", "game_over"]:

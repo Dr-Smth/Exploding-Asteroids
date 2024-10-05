@@ -2,13 +2,15 @@ import pygame
 import sys
 from constants import *
 
-def handle_game_over_state(screen, font, events, player_score, high_score):
+def handle_game_over_state(screen, font, events, player_score, asteroid_kill_score, asteroid_kills, high_score):
     # Fill the screen with a background color
     screen.fill((0, 0, 0))
 
+    time_score = player_score - asteroid_kill_score
+
     # Render the game over text
     game_over_text = font.render("Game Over !!!", True, (255, 0, 0))
-    score_text = font.render(f"Final Score: {player_score}", True, (255, 255, 255))
+    score_text = font.render(f"Final Score: {player_score}, Asteroids 'Sploded: {asteroid_kills}, Asteroid Score: {asteroid_kill_score}, Time Score: {time_score}", True, (255, 255, 255))
     restart_text = font.render("Press R to Restart, M for Menu, or Q to Quit", True, (255, 255, 255))
     well_done_text = font.render("Well Done, You've set a new High Score !!!", True, (255, 255, 255))
 
